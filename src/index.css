@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --font-bebas: "Bebas Neue", "serif";
+
+  --color-primary-chocolate: #6f371c;
+  --color-primary-orange: #ff3600;
+  --color-text-dull: #9b928e;
+}
+
+.active {
+  @apply bg-black/10 text-primary-orange font-semibold duration-200;
+}
