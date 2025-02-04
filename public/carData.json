@@ -1,0 +1,276 @@
+[
+  {
+    "_id": 1,
+    "carModel": "Toyota Camry",
+    "carType": "Sedan",
+    "year": 2023,
+    "dailyRentalPrice": 50,
+    "availability": true,
+    "vehicleRegistrationNumber": "XYZ-1234",
+    "features": ["GPS", "Air Conditioning", "Bluetooth"],
+    "description": "A reliable and fuel-efficient sedan with modern features, perfect for city and highway driving.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/Pv5pyPLJ/maza-mx-5-miata.webp",
+    "location": "Los Angeles, CA",
+    "carInfo": {
+      "engine": "2.5L 4C",
+      "fuel": "Gasoline",
+      "mileage": "30 MPG",
+      "transmission": "Automatic"
+    },
+    "addedBy": {
+      "userId": "abc123",
+      "name": "John Doe",
+      "email": "johndoe@example.com"
+    },
+    "dateAdded": "2025-02-03T12:00:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "_id": 2,
+    "carModel": "Honda Accord",
+    "carType": "Sedan",
+    "year": 2022,
+    "dailyRentalPrice": 55,
+    "availability": true,
+    "vehicleRegistrationNumber": "ABC-5678",
+    "features": ["GPS", "Leather Seats", "Backup Camera"],
+    "description": "A stylish sedan with excellent fuel economy and safety features.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/xt48BrYm/hyundai-elanta.webp",
+    "location": "San Francisco, CA",
+    "carInfo": {
+      "engine": "1.5L T",
+      "fuel": "Gasoline",
+      "mileage": "33 MPG",
+      "transmission": "CVT"
+    },
+    "addedBy": {
+      "userId": "xyz789",
+      "name": "Jane Smith",
+      "email": "janesmith@example.com"
+    },
+    "dateAdded": "2025-02-03T14:30:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "id": 3,
+    "carModel": "Bugatti Chiron Super Sport",
+    "carType": "Luxury",
+    "year": 2023,
+    "dailyRentalPrice": 25000,
+    "availability": true,
+    "vehicleRegistrationNumber": "BUG-2023-SS",
+    "features": ["GPS", "AC", "Heated Seats"],
+    "description": "The Bugatti Chiron Super Sport is a masterpiece of engineering, offering unparalleled performance, luxury, and speed. Designed for those who demand the best.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/cS64c5v1/bugatte.jpg",
+    "location": "Dubai, UAE",
+    "carInfo": {
+      "engine": "8.0L QTW16",
+      "fuel": "Petrol",
+      "mileage": "8 MPG",
+      "transmission": "Automatic"
+    },
+    "addedBy": {
+      "userId": "xyz789",
+      "name": "Jane Smith",
+      "email": "janesmith@example.com"
+    },
+    "dateAdded": "2025-02-03T14:30:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "_id": 4,
+    "carModel": "Tesla Model 3",
+    "carType": "Electric",
+    "year": 2024,
+    "dailyRentalPrice": 90,
+    "availability": true,
+    "vehicleRegistrationNumber": "EV-2024",
+    "features": ["Autopilot", "Fast Charging", "Glass Roof"],
+    "description": "A high-tech electric car with excellent range and performance.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/1CNKSm6/porsche.jpg",
+    "location": "Austin, TX",
+    "carInfo": {
+      "engine": "Dual M",
+      "fuel": "Electric",
+      "mileage": "300 MPC",
+      "transmission": "SS"
+    },
+    "addedBy": {
+      "userId": "tesla001",
+      "name": "Elon Musk",
+      "email": "elon@example.com"
+    },
+    "dateAdded": "2025-02-01T17:45:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "_id": 8,
+    "carModel": "Ford Mustang",
+    "carType": "Sports",
+    "year": 2024,
+    "dailyRentalPrice": 110,
+    "availability": true,
+    "vehicleRegistrationNumber": "SPT-5678",
+    "features": ["Convertible", "Premium Sound System", "Heated Seats"],
+    "description": "A powerful and stylish sports car, perfect for an exhilarating drive.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/p6hj7YjY/ford-mustand.jpg",
+    "location": "Miami, FL",
+    "carInfo": {
+      "engine": "5.0L V8",
+      "fuel": "Gasoline",
+      "mileage": "20 MPG",
+      "transmission": "Manual"
+    },
+    "addedBy": {
+      "userId": "user002",
+      "name": "Jane Smith",
+      "email": "janesmith@example.com"
+    },
+    "dateAdded": "2025-02-03T14:30:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "_id": 5,
+    "carModel": "Chevrolet Suburban",
+    "carType": "SUV",
+    "year": 2022,
+    "dailyRentalPrice": 95,
+    "availability": true,
+    "vehicleRegistrationNumber": "SUV-5555",
+    "features": ["8-Passenger Seating", "4WD", "Premium Sound System"],
+    "description": "Large SUV with plenty of space for families and group travel.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/0yDtm8Jk/chevrolet.jpg",
+    "location": "Miami, FL",
+    "carInfo": {
+      "engine": "5.3L V8",
+      "fuel": "Gasoline",
+      "mileage": "18 MPG",
+      "transmission": "Automatic"
+    },
+    "addedBy": {
+      "userId": "miami123",
+      "name": "Carlos Rivera",
+      "email": "carlosr@example.com"
+    },
+    "dateAdded": "2025-01-31T10:00:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "_id": 6,
+    "carModel": "BMW 5 Series",
+    "carType": "Luxury",
+    "year": 2023,
+    "dailyRentalPrice": 120,
+    "availability": true,
+    "vehicleRegistrationNumber": "LUX-7777",
+    "features": ["Leather Interior", "Heated Seats", "Adaptive Cruise Control"],
+    "description": "A luxury sedan with top-tier comfort and driving performance.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/n8zWLyHp/bwm-i3.webp",
+    "location": "New York, NY",
+    "carInfo": {
+      "engine": "3.0L TI6",
+      "fuel": "Gasoline",
+      "mileage": "26 MPG",
+      "transmission": "Automatic"
+    },
+    "addedBy": {
+      "userId": "bmwfan",
+      "name": "Michael Andrews",
+      "email": "michael@example.com"
+    },
+    "dateAdded": "2025-02-03T20:10:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "_id": 7,
+    "carModel": "Toyota Corolla",
+    "carType": "Sedan",
+    "year": 2023,
+    "dailyRentalPrice": 45,
+    "availability": true,
+    "vehicleRegistrationNumber": "SED-1234",
+    "features": ["GPS", "Air Conditioning", "Bluetooth"],
+    "description": "A comfortable and fuel-efficient sedan, ideal for daily commutes and long trips.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/VXKJVMv/toyota-corolla.webp",
+    "location": "Los Angeles, CA",
+    "carInfo": {
+      "engine": "1.8L 4C",
+      "fuel": "Gasoline",
+      "mileage": "32 MPG",
+      "transmission": "Automatic"
+    },
+    "addedBy": {
+      "userId": "user001",
+      "name": "John Doe",
+      "email": "johndoe@example.com"
+    },
+    "dateAdded": "2025-02-03T12:00:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "_id": 9,
+    "carModel": "Tesla Model Y",
+    "carType": "Electric",
+    "year": 2023,
+    "dailyRentalPrice": 85,
+    "availability": true,
+    "vehicleRegistrationNumber": "EV-9012",
+    "features": ["Autopilot", "Fast Charging", "Glass Roof"],
+    "description": "An all-electric SUV with long range and cutting-edge technology.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/y0rGbmd/subara-brz.webp",
+    "location": "San Francisco, CA",
+    "carInfo": {
+      "engine": "DM",
+      "fuel": "Electric",
+      "mileage": "330 MPC",
+      "transmission": "SS"
+    },
+    "addedBy": {
+      "userId": "user003",
+      "name": "Robert Johnson",
+      "email": "robertj@example.com"
+    },
+    "dateAdded": "2025-02-02T09:15:00Z",
+    "bookingStatus": "available"
+  },
+  {
+    "_id": 10,
+    "carModel": "BMW X5",
+    "carType": "SUV",
+    "year": 2022,
+    "dailyRentalPrice": 130,
+    "availability": true,
+    "vehicleRegistrationNumber": "LUX-5555",
+    "features": [
+      "Leather Seats",
+      "Panoramic Sunroof",
+      "Adaptive Cruise Control"
+    ],
+    "description": "A luxury SUV offering a smooth ride with high-end features and comfort.",
+    "bookingCount": 0,
+    "imageUrl": "https://i.ibb.co.com/v6tfRk8t/porsche-911.jpg",
+    "location": "New York, NY",
+    "carInfo": {
+      "engine": "3.0L TI6",
+      "fuel": "Gasoline",
+      "mileage": "26 MPG",
+      "transmission": "Automatic"
+    },
+    "addedBy": {
+      "userId": "user004",
+      "name": "Michael Andrews",
+      "email": "michael@example.com"
+    },
+    "dateAdded": "2025-02-03T20:10:00Z",
+    "bookingStatus": "available"
+  }
+]
