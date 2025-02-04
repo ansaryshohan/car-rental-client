@@ -7,7 +7,8 @@
 
   --color-primary-chocolate: #6f371c;
   --color-primary-orange: #ff3600;
-  --color-text-dull: #9b928e;
+  --color-dull-text: #9b928e;
+  --color-gray-background:#191919;
 }
 
 .active {
