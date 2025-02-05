@@ -17,7 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-cars",
-        element: <HomePage />,
+        element: <div className="h-[200vh] bg-green-500">all cars</div>,
       },
       {
         path: "/about-us",
@@ -25,6 +25,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/contact-us",
+        element: <ContactUsPage />,
+      },
+      {
+        path: "/login",
+        element: <ContactUsPage />,
+      },
+      {
+        path: "/register",
         element: <ContactUsPage />,
       },
     ],

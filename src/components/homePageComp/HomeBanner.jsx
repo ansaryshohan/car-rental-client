@@ -1,4 +1,4 @@
-import carBgImg from "../../assets/carBg.jpg" 
+import carBgImg from "../../assets/carBg.jpg";
 
 const HomeBanner = () => {
   return (
@@ -20,7 +20,7 @@ const HomeBanner = () => {
       <div className="absolute w-full bottom-12 lg:bottom-9 left-0 flex items-center justify-center">
         <button className="px-12 py-3 rounded-4xl border border-primary-orange bg-transparent text-primary-orange text-lg font-bold hover:bg-primary-orange hover:text-white hover:transition-all hover:duration-500 hover:scale-x-[85%]">
           {" "}
-          Discover Cars
+          Rent Your Car
         </button>
       </div>
     </div>

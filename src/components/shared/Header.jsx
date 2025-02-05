@@ -3,7 +3,7 @@ import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { FaUserCheck } from "react-icons/fa";
 import { GiCrossedBones } from "react-icons/gi";
 import { IoMenu } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logoImg from "../../assets/logo.png";
 import userDemoImg from "../../assets/user_demo.jpg";
 
@@ -65,7 +65,7 @@ const Header = () => {
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  `w-full h-full flex items-center justify-center rounded-4xl text-lg ${
+                  `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${
                     isActive ? "active" : ""
                   }`
                 }
@@ -80,7 +80,7 @@ const Header = () => {
               <NavLink
                 to="/all-cars"
                 className={({ isActive }) =>
-                  `w-full h-full flex items-center justify-center rounded-4xl text-lg ${
+                  `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${
                     isActive ? "active" : ""
                   }`
                 }
@@ -95,7 +95,7 @@ const Header = () => {
               <NavLink
                 to="/about-us"
                 className={({ isActive }) =>
-                  `w-full h-full flex items-center justify-center rounded-4xl text-lg ${
+                  `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${
                     isActive ? "active" : ""
                   }`
                 }
@@ -110,7 +110,7 @@ const Header = () => {
               <NavLink
                 to="/contact-us"
                 className={({ isActive }) =>
-                  `w-full h-full flex items-center justify-center rounded-4xl text-lg ${
+                  `w-full h-full flex items-center justify-center rounded-4xl hover:bg-black/10 text-lg ${
                     isActive ? "active" : ""
                   }`
                 }
@@ -120,9 +120,34 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        <div className="w-3/12 lg:w-1/12 h-[13vh] flex items-center justify-end gap-4 pr-6">
+        <div className=" h-[13vh] flex items-center justify-between gap-4">
+          {/* signIn signUp buttons div */}
+          <div className="flex items-center justify-between gap-1 ">
+            {/* signUp button */}
+            <div className="hidden lg:block h-[8vh] rounded-xl bg-slate-100 text-black hover:bg-white/60 hover:text-primary-orange duration-200">
+              <button className="w-full h-full text-center capitalize">
+                <Link
+                  to="/login"
+                  className={`w-full h-full px-3 flex items-center justify-center  text-sm`}
+                >
+                  Sign Up
+                </Link>
+              </button>
+            </div>
+            {/* signIn button */}
+            <div className=" h-[8vh] rounded-xl bg-slate-100 text-black hover:bg-white/60 hover:text-primary-orange duration-200">
+              <button className="w-full h-full text-center capitalize">
+                <Link
+                  to="/register"
+                  className={`w-full h-full px-3 flex items-center justify-center  text-sm`}
+                >
+                  Sign In
+                </Link>
+              </button>
+            </div>
+          </div>
           {/* profile dropdown */}
-          <div className="relative ml-4 flex-shrink-0">
+          <div className="hidden relative ml-4 flex-shrink-0">
             <div>
               <button
                 type="button"
@@ -165,21 +190,6 @@ const Header = () => {
                     <FaUserCheck size={18} />
                   </span>
                   <span className="block text-center"> Your Profile</span>
-                </span>
-              </a>
-              <a
-                href="#"
-                className="block px-4 pt-1 pb-4 text-base text-white hover:bg-black/20"
-                role="menuitem"
-                tabIndex="-1"
-                id="user-menu-item-2"
-                onClick={() => setLoginDropdown(false)}
-              >
-                <span className="flex items-center gap-2">
-                  <span className="block">
-                    <BiLogIn size={18} />
-                  </span>
-                  <span className="block text-center"> Login</span>
                 </span>
               </a>
               <a
