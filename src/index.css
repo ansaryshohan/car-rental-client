@@ -14,3 +14,7 @@
 .active {
   @apply bg-black/10 text-primary-orange font-semibold duration-200;
 }
+
+.clipImg{
+  clip-path: polygon(25% 0%, 77% 0, 52% 100%, 0% 100%);
+}

@@ -170,7 +170,7 @@ const Footer = () => {
         </ul>
         <div className="mt-6 border-t border-dull-text border-dashed  pt-4">
           <p className="text-center text-xs/relaxed text-white">
-            © Company 2025. All rights reserved.Created by &nbsp;
+            © Caravan 2025. All rights reserved.Created by &nbsp;
             <a
               href="#"
               className="text-gray-500 underline transition hover:text-gray-500/75"
