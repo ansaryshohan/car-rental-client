@@ -109,6 +109,21 @@ const Header = () => {
               onClick={() => setHamBurgerMenu(false)}
             >
               <NavLink
+                to="/add-cars"
+                className={({ isActive }) =>
+                  `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${
+                    isActive ? "active" : ""
+                  }`
+                }
+              >
+                Add Cars
+              </NavLink>
+            </li>
+            <li
+              className="w-full lg:h-full text-center capitalize hover:text-primary-orange duration-200"
+              onClick={() => setHamBurgerMenu(false)}
+            >
+              <NavLink
                 to="/about-us"
                 className={({ isActive }) =>
                   `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
 
@@ -8,13 +8,19 @@
   --color-primary-chocolate: #6f371c;
   --color-primary-orange: #ff3600;
   --color-dull-text: #9b928e;
-  --color-gray-background:#191919;
+  --color-gray-background: #191919;
 }
 
 .active {
   @apply bg-black/10 text-primary-orange font-semibold duration-200;
 }
 
-.clipImg{
+.clipImg {
   clip-path: polygon(25% 0%, 77% 0, 52% 100%, 0% 100%);
+}
+.service-card:hover > p {
+  @apply text-white;
+}
+.divider::after,.divider::before{
+  @apply bg-dull-text
 }

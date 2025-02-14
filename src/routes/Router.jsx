@@ -1,12 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
+import AboutUsPage from "../pages/AboutUsPage";
+import AddCarsPage from "../pages/AddCarsPage";
+import AllCarsPage from "../pages/AllCarsPage";
+import ContactUsPage from "../pages/ContactUsPage";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
-import AboutUsPage from "../pages/AboutUsPage";
-import ContactUsPage from "../pages/ContactUsPage";
 import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
+import RegisterPage from "../pages/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-cars",
-        element: <div className="h-[200vh] bg-green-500">all cars</div>,
+        element: <AllCarsPage />,
+      },
+      {
+        path: "/add-cars",
+        element: <AddCarsPage />,
       },
       {
         path: "/about-us",

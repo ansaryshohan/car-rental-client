@@ -1,9 +1,9 @@
 [
   {
-    "_id": 1,
     "carModel": "Toyota Camry",
     "carType": "Sedan",
     "year": 2023,
+    "adminApproval":"approved",
     "dailyRentalPrice": 50,
     "availability": true,
     "vehicleRegistrationNumber": "XYZ-1234",
@@ -16,7 +16,9 @@
       "engine": "2.5L 4C",
       "fuel": "Gasoline",
       "mileage": "30 MPG",
-      "transmission": "Automatic"
+      "transmission": "Automatic",
+      "doors": 4,
+      "passenger": 5
     },
     "addedBy": {
       "userId": "abc123",
@@ -27,10 +29,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 2,
     "carModel": "Honda Accord",
     "carType": "Sedan",
     "year": 2022,
+    "adminApproval":"approved",
     "dailyRentalPrice": 55,
     "availability": true,
     "vehicleRegistrationNumber": "ABC-5678",
@@ -43,7 +45,9 @@
       "engine": "1.5L T",
       "fuel": "Gasoline",
       "mileage": "33 MPG",
-      "transmission": "CVT"
+      "transmission": "CVT",
+      "doors": 4,
+      "passenger": 5
     },
     "addedBy": {
       "userId": "xyz789",
@@ -54,10 +58,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 3,
     "carModel": "Bugatti Chiron Super Sport",
     "carType": "Luxury",
     "year": 2023,
+    "adminApproval":"approved",
     "dailyRentalPrice": 25000,
     "availability": true,
     "vehicleRegistrationNumber": "BUG-2023-SS",
@@ -70,7 +74,9 @@
       "engine": "8.0L QTW16",
       "fuel": "Petrol",
       "mileage": "8 MPG",
-      "transmission": "Automatic"
+      "transmission": "Automatic",
+      "doors": 2,
+      "passenger": 2
     },
     "addedBy": {
       "userId": "xyz789",
@@ -81,10 +87,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 4,
     "carModel": "Tesla Model 3",
     "carType": "Electric",
     "year": 2024,
+    "adminApproval":"approved",
     "dailyRentalPrice": 90,
     "availability": true,
     "vehicleRegistrationNumber": "EV-2024",
@@ -97,7 +103,9 @@
       "engine": "Dual M",
       "fuel": "Electric",
       "mileage": "300 MPC",
-      "transmission": "SS"
+      "transmission": "SS",
+      "doors": 4,
+      "passenger": 5
     },
     "addedBy": {
       "userId": "tesla001",
@@ -108,10 +116,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 8,
     "carModel": "Ford Mustang",
     "carType": "Sports",
     "year": 2024,
+    "adminApproval":"approved",
     "dailyRentalPrice": 110,
     "availability": true,
     "vehicleRegistrationNumber": "SPT-5678",
@@ -124,7 +132,9 @@
       "engine": "5.0L V8",
       "fuel": "Gasoline",
       "mileage": "20 MPG",
-      "transmission": "Manual"
+      "transmission": "Manual",
+      "doors": 2,
+      "passenger": 4
     },
     "addedBy": {
       "userId": "user002",
@@ -135,10 +145,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 5,
     "carModel": "Chevrolet Suburban",
     "carType": "SUV",
     "year": 2022,
+    "adminApproval":"approved",
     "dailyRentalPrice": 95,
     "availability": true,
     "vehicleRegistrationNumber": "SUV-5555",
@@ -151,7 +161,9 @@
       "engine": "5.3L V8",
       "fuel": "Gasoline",
       "mileage": "18 MPG",
-      "transmission": "Automatic"
+      "transmission": "Automatic",
+      "doors": 4,
+      "passenger": 8
     },
     "addedBy": {
       "userId": "miami123",
@@ -162,10 +174,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 6,
     "carModel": "BMW 5 Series",
     "carType": "Luxury",
     "year": 2023,
+    "adminApproval":"approved",
     "dailyRentalPrice": 120,
     "availability": true,
     "vehicleRegistrationNumber": "LUX-7777",
@@ -178,7 +190,9 @@
       "engine": "3.0L TI6",
       "fuel": "Gasoline",
       "mileage": "26 MPG",
-      "transmission": "Automatic"
+      "transmission": "Automatic",
+      "doors": 4,
+      "passenger": 5
     },
     "addedBy": {
       "userId": "bmwfan",
@@ -189,10 +203,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 7,
     "carModel": "Toyota Corolla",
     "carType": "Sedan",
     "year": 2023,
+    "adminApproval":"approved",
     "dailyRentalPrice": 45,
     "availability": true,
     "vehicleRegistrationNumber": "SED-1234",
@@ -205,7 +219,9 @@
       "engine": "1.8L 4C",
       "fuel": "Gasoline",
       "mileage": "32 MPG",
-      "transmission": "Automatic"
+      "transmission": "Automatic",
+      "doors": 4,
+      "passenger": 5
     },
     "addedBy": {
       "userId": "user001",
@@ -216,10 +232,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 9,
     "carModel": "Tesla Model Y",
     "carType": "Electric",
     "year": 2023,
+    "adminApproval":"approved",
     "dailyRentalPrice": 85,
     "availability": true,
     "vehicleRegistrationNumber": "EV-9012",
@@ -232,7 +248,9 @@
       "engine": "DM",
       "fuel": "Electric",
       "mileage": "330 MPC",
-      "transmission": "SS"
+      "transmission": "SS",
+      "doors": 4,
+      "passenger": 5
     },
     "addedBy": {
       "userId": "user003",
@@ -243,10 +261,10 @@
     "bookingStatus": "available"
   },
   {
-    "_id": 10,
     "carModel": "BMW X5",
     "carType": "SUV",
     "year": 2022,
+    "adminApproval":"approved",
     "dailyRentalPrice": 130,
     "availability": true,
     "vehicleRegistrationNumber": "LUX-5555",
@@ -263,7 +281,9 @@
       "engine": "3.0L TI6",
       "fuel": "Gasoline",
       "mileage": "26 MPG",
-      "transmission": "Automatic"
+      "transmission": "Automatic",
+      "doors": 4,
+      "passenger": 5
     },
     "addedBy": {
       "userId": "user004",

@@ -8,7 +8,7 @@ const HomePage = () => {
       <HomeBanner />
       <OurServicesSection />
       <RecentCarSection />
-      <SaveMoneyBannerSection/>
+      <SaveMoneyBannerSection />
     </div>
   );
 };

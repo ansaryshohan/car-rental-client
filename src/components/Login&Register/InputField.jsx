@@ -13,7 +13,7 @@ const InputField = ({
   const id = htmlFor || getChildrenId(children);
 
   return (
-    <div className={`form-control ${customClassName ? customClassName : ""}`}>
+    <div className={`form-control ${customClassName ? customClassName : ""} flex flex-col gap-2 w-full`}>
       {label && (
         <label className="label" htmlFor={id}>
           <span className={`label-text ${customClassName}`}>{label}</span>

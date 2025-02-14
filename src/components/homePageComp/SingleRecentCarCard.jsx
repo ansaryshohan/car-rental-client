@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
+import doorIcon from "../../assets/car-door-icon.png";
 import mileageIcon from "../../assets/car-mileage-icon.png";
-import engineIcon from "../../assets/engine-icon.png";
 import fuelIcon from "../../assets/fuel-icon.png";
-import gearStickIcon from "../../assets/gear-stick-icon.png";
+import passengerIcon from "../../assets/passenger-icon.png";
 
 const SingleRecentCarCard = ({ singleCar }) => {
   const {
@@ -13,7 +13,7 @@ const SingleRecentCarCard = ({ singleCar }) => {
     dailyRentalPrice,
     availability,
     imageUrl,
-    carInfo: { engine, fuel, mileage, transmission },
+    carInfo: { engine, fuel, mileage, transmission, passenger, doors },
     dateAdded,
     addedBy,
     location,
@@ -54,27 +54,42 @@ const SingleRecentCarCard = ({ singleCar }) => {
       </div>
       {/* car info of milage,fuel */}
       <div className=" w-10/12 mx-auto py-4  border-b border-dashed border-dull-text/70 mb-2 flex items-stretch justify-between gap-2">
-        <div className="flex flex-col items-center justify-center gap-1" title={"Mileage"}>
+        <div
+          className="flex flex-col items-center justify-between gap-1"
+          title={"Mileage"}
+        >
           <img src={mileageIcon} alt="mileage" className="w-9/12" />
           <p className="text-xs font-medium">{mileage}</p>
         </div>
-        <div className="flex flex-col items-center justify-center gap-1" title="Engine">
-          <img src={engineIcon} alt="mileage" className="w-9/12" />
-          <p className="text-xs font-medium">{engine}</p>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-1" title="Fuel">
+        <div
+          className="flex flex-col items-center justify-between gap-1"
+          title="Fuel"
+        >
           <img src={fuelIcon} alt="mileage" className="w-9/12" />
           <p className="text-xs font-medium">{fuel}</p>
         </div>
-        <div className="flex flex-col items-center justify-center gap-1" title="Transmission">
-          <img src={gearStickIcon} alt="mileage" className="w-9/12" />
-          <p className="text-xs font-medium">{transmission}</p>
+        <div
+          className="flex flex-col items-center justify-between gap-1"
+          title="Doors"
+        >
+          <img src={doorIcon} alt="mileage" className="w-7/12" />
+          <p className="text-sm font-medium">{doors}</p>
+        </div>
+        <div
+          className="flex flex-col items-center justify-between gap-1"
+          title="Passengers"
+        >
+          <img src={passengerIcon} alt="mileage" className="w-9/12" />
+          <p className="text-sm font-medium">{passenger}</p>
         </div>
       </div>
       {/* user info */}
       <div className="w-10/12 mx-auto py-4 mb-2 flex items-stretch justify-between gap-2 text-dull-text text-xs">
         <p>
-          City: <span className="font-medium text-white">{location.split(",")[0]}</span>
+          City:{" "}
+          <span className="font-medium text-white">
+            {location.split(",")[0]}
+          </span>
         </p>
         <p>
           Agent: <span className="font-medium text-white">{addedBy?.name}</span>

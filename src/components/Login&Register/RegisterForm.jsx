@@ -8,6 +8,7 @@ const RegisterForm = () => {
   const { signUpWithEmailAndPassword, updateUser } = useAuthContext();
   const [passwordToggle, setPasswordToggle] = useState(false);
   const [confirmPasswordToggle, setConfirmPasswordToggle] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [userInput, setUserInput] = useState({
     userName: "",
     photoFile: "",
@@ -28,19 +29,16 @@ const RegisterForm = () => {
 
     if (e.target.name === "photo") {
       const photoObj = e.target?.files[0];
-      // console.log(photoObj.size)
 
       if (photoObj?.size >= 100000) {
         setErrorState({
           ...errorState,
-          emailError: "Photo can't be over 1MB",
+          photoError: "Photo can't be over 1MB",
         });
         return;
       }
-
       setUserInput({ ...userInput, photoFile: photoObj });
     }
-
     if (e.target.name === "email") {
       const emailInputValue = e.target.value;
       const emailRegEx =
@@ -120,6 +118,7 @@ const RegisterForm = () => {
       passwordError: "",
       emailError: "",
       confirmPasswordError: "",
+      photoError: "",
     });
   };
 
@@ -127,6 +126,7 @@ const RegisterForm = () => {
 
   const handleRegisterOnSubmit = (e) => {
     e.preventDefault();
+    setSubmitLoading(true);
     const formData = new FormData();
     if (
       (!errorState.emailError && !errorState.passwordError,
@@ -137,7 +137,7 @@ const RegisterForm = () => {
         .then(async (result) => {
           if (result.user) {
             // update user displayName and photoUrl
-            console.log(userInput.photoFile, result.user);
+            // console.log(userInput.photoFile, result.user);
 
             formData.set("photo", userInput.photoFile);
             formData.set("userEmail", result?.user?.email);
@@ -147,7 +147,7 @@ const RegisterForm = () => {
               "http://localhost:8000/caravan/user-image",
               { method: "POST", body: formData }
             );
-            const {data} = await response.json();
+            const { data } = await response.json();
 
             // console.log(data);
 
@@ -157,6 +157,7 @@ const RegisterForm = () => {
             })
               .then(() => {
                 toast.success("user created successfully");
+                setSubmitLoading(false);
                 navigate("/");
                 return;
               })
@@ -175,15 +176,11 @@ const RegisterForm = () => {
     }
 
     setErrorState({ ...errorState, registerError: "all input not filled" });
-
-    return toast.error(errorState.registerError);
   };
 
   return (
     <>
       <form
-        noValidate=""
-        action=""
         className="space-y-6"
         onSubmit={handleRegisterOnSubmit}
       >
@@ -196,6 +193,7 @@ const RegisterForm = () => {
               placeholder="User Name"
               className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"
               onChange={handleUserInputOnChange}
+              required
             />
           </InputField>
         </div>
@@ -266,7 +264,15 @@ const RegisterForm = () => {
           className="block w-1/2 mx-auto p-3 text-center font-bold rounded-sm text-gray-50 bg-primary-orange"
           type="submit"
         >
-          Sign Up
+          {submitLoading ? (
+            <>
+              <span className="loading loading-spinner loading-sm"></span>
+              <span className="loading loading-spinner loading-md"></span>
+              <span className="loading loading-spinner loading-lg"></span>
+            </>
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </form>
     </>

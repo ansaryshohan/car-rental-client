@@ -8,7 +8,7 @@ const RecentCarSection = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["recentCars"],
     queryFn: async () => {
-      const res = await axios.get("/carData.json");
+      const res = await axios.get(`${import.meta.env.VITE_backend}caravan/cars/top-cars`);
       return res.data;
     },
   });
@@ -27,7 +27,7 @@ const RecentCarSection = () => {
 
       {/* recent cars cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-5 w-11/12 mx-auto ">
-        {data.slice(0, 6).map((singleCarData) => (
+        {data?.data?.map((singleCarData) => (
           <SingleRecentCarCard
             key={singleCarData._id}
             singleCar={singleCarData}
@@ -36,7 +36,7 @@ const RecentCarSection = () => {
       </div>
       {/* view all cars button */}
       <div className="pt-4 pb-3 w-full flex items-center justify-center">
-        <Link to={"/cars"}>
+        <Link to={"/all-cars"}>
         <button className="px-12 py-3 rounded-4xl border border-primary-orange bg-primary-orange text-white text-lg font-bold hover:bg-primary-orange hover:text-white hover:transition-all hover:duration-500 hover:scale-x-[85%]">
           {" "}
           View More
