@@ -19,8 +19,12 @@ const SingleRecentCarCard = ({ singleCar }) => {
     location,
   } = singleCar;
 
+  // year formatting for year
+  const fullDate = new Date(year);
+  const formattedYear = fullDate.getFullYear();
+  
+  // date formatting for dateAdded
   const dateObj = new Date(dateAdded);
-
   const formattedDate = `${String(dateObj.getDate()).padStart(2, "0")}-${String(
     dateObj.getMonth() + 1
   ).padStart(2, "0")}-${dateObj.getFullYear()}`;
@@ -49,7 +53,7 @@ const SingleRecentCarCard = ({ singleCar }) => {
           <span className="flex items-center justify-center text-center">
             .
           </span>{" "}
-          {year}
+          {formattedYear}
         </p>
       </div>
       {/* car info of milage,fuel */}

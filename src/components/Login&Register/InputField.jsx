@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const InputField = ({
   label,
+  requiredStar,
   children,
   htmlFor,
   error,
@@ -13,10 +14,16 @@ const InputField = ({
   const id = htmlFor || getChildrenId(children);
 
   return (
-    <div className={`form-control ${customClassName ? customClassName : ""} flex flex-col gap-2 w-full`}>
+    <div
+      className={`form-control ${
+        customClassName ? customClassName : ""
+      } flex flex-col gap-2 w-full`}
+    >
       {label && (
         <label className="label" htmlFor={id}>
-          <span className={`label-text ${customClassName}`}>{label}</span>
+          <span className={`label-text ${customClassName} text-base`}>
+            {label} {requiredStar && <sup className="text-primary-orange font-bold">*</sup>}{" "}
+          </span>
         </label>
       )}
       {id === "password" || id === "confirm-password" ? (

@@ -1,281 +1,607 @@
-import { useState } from "react";
-import DatePicker from "react-datepicker";
+import { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import InputField from "../Login&Register/InputField";
+import CarDetailsInputs from "./CarDetailsInputs";
+import CarInfoInputs from "./CarInfoInputs";
+import UserInfoInputs from "./UserInfoInputs";
+import { toast } from "react-toastify";
 
-const AddCarForm = () => {
+const AddCarForm = ({ formStepNo, setFormStepNo, formHeadlineArray }) => {
   const { user } = useAuthContext();
   const [carDataUploadLoading, setCarDataUploadLoading] = useState(false);
-  const [reviewInput, setReviewInput] = useState({
-    gameName: "",
-    image: "",
-    review: "",
-    rating: "",
-    publishYear: new Date(),
-    genre: "action",
-    userEmail: "",
-    comments: [],
+  const [carDetailsInput, setCarDetailsInput] = useState({
+    carModel: "",
+    carType: "",
+    year: new Date(),
+    adminApproval: "pending",
+    dailyRentalPrice: 0,
+    availability: true,
+    vehicleRegistrationNumber: "",
+    features: [],
+    description: "",
+    bookingCount: 0,
+    image: null,
+    imageName: "",
+    location: "",
+    carInfo: {
+      engine: "",
+      fuel: "",
+      mileage: "",
+      transmission: "",
+      doors: 0,
+      passenger: 0,
+    },
+    addedBy: {
+      userId: user?.uid,
+      name: user?.displayName,
+      email: user?.email,
+    },
+    dateAdded: new Date(),
+    bookingStatus: "available",
   });
 
-  const [reviewInputError, setReviewInputError] = useState({
-    gameNameError: "",
+  const [carDetailsInputError, setCarDetailsInputError] = useState({
+    carModelError: "",
+    carTypeError: "",
     imageError: "",
-    reviewError: "",
-    ratingError: "",
+    descriptionError: "",
+    dailyRentalPriceError: "",
+    vehicleRegistrationNumberError: "",
+    locationError: "",
+    engineError: "",
+    fuelError: "",
+    doorsError: "",
+    passengerError: "",
+    featuresError: "",
   });
 
-  const renderYearContent = (year) => {
-    // console.log(year)
-    const tooltipText = `Tooltip for year: ${year}`;
-    return <span title={tooltipText}>{year}</span>;
+  const handleFormContent = () => {
+    switch (formStepNo) {
+      case 0:
+        return (
+          <CarDetailsInputs
+            handleCarDetailsInputOnChange={handleCarDetailsInputOnChange}
+            carDetailsInput={carDetailsInput}
+            carDetailsInputError={carDetailsInputError}
+            setCarDetailsInput={setCarDetailsInput}
+          />
+        );
+      case 1:
+        return (
+          <CarInfoInputs
+            handleCarDetailsInputOnChange={handleCarDetailsInputOnChange}
+            carDetailsInput={carDetailsInput}
+            carDetailsInputError={carDetailsInputError}
+          />
+        );
+      case 2:
+        return <UserInfoInputs user={user} />;
+
+      default:
+        return (
+          <CarDetailsInputs
+            handleCarDetailsInputOnChange={handleCarDetailsInputOnChange}
+            renderYearContent={renderYearContent}
+            carDetailsInput={carDetailsInput}
+            carDetailsInputError={carDetailsInputError}
+          />
+        );
+    }
   };
 
-  const handleReviewInputOnChange = (e) => {
-    // gameName error
-    // if (e.target.name === "gameName") {
-    //   const value = e.target.value;
-    //   setReviewInputError({
-    //     ...reviewInputError,
-    //     gameNameError: "",
-    //   });
-    //   if (value.length > 0) {
-    //     return setReviewInput({
-    //       ...reviewInput,
-    //       [e.target.name]: e.target.value,
-    //     });
-    //   }
-    //   return setReviewInputError({
-    //     ...reviewInputError,
-    //     gameNameError: "provide a game name",
-    //   });
-    // }
+  const handleCarDetailsInputOnChange = (e) => {
+    // carModel error
+    if (e.target.name === "carModel") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        carModelError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          [e.target.name]: e.target.value,
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        carModelError: "Provide Car Model Name",
+      });
+    }
+    // carType error
+    if (e.target.name === "carType") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        carTypeError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          [e.target.name]: e.target.value,
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        carModelError: "select a car Model",
+      });
+    }
     // image error
-    // if (e.target.name === "image") {
-    //   const value = e.target.value;
-    //   setReviewInputError({
-    //     ...reviewInputError,
-    //     imageError: "",
-    //   });
-    //   if (value.length > 0) {
-    //     return setReviewInput({
-    //       ...reviewInput,
-    //       [e.target.name]: e.target.value,
-    //     });
-    //   }
-    //   return setReviewInputError({
-    //     ...reviewInputError,
-    //     imageError: "provide a game image url",
-    //   });
-    // }
-    // review error
-    // if (e.target.name === "review") {
-    //   const value = e.target.value;
-    //   setReviewInputError({
-    //     ...reviewInputError,
-    //     reviewError: "",
-    //   });
-    //   if (value.length > 0) {
-    //     return setReviewInput({
-    //       ...reviewInput,
-    //       [e.target.name]: e.target.value,
-    //     });
-    //   }
-    //   return setReviewInputError({
-    //     ...reviewInputError,
-    //     reviewError: "give a review about the game",
-    //   });
-    // }
-    // rating error
-    // if (e.target.name === "rating") {
-    //   const value = Number(e.target.value);
-    //   setReviewInputError({
-    //     ...reviewInputError,
-    //     ratingError: "",
-    //   });
-    //   if (value >= 0 && value <= 10) {
-    //     return setReviewInput({
-    //       ...reviewInput,
-    //       [e.target.name]: e.target.value,
-    //     });
-    //   }
-    //   return setReviewInputError({
-    //     ...reviewInputError,
-    //     ratingError: "give a rating between 0-10",
-    //   });
-    // }
-    // setReviewInput({ ...reviewInput, [e.target.name]: e.target.value });
+    if (e.target.name === "image") {
+      const file = e.target.files[0];
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        imageError: "",
+      });
+      setCarDetailsInput({ ...carDetailsInput, image: null, imageName: "" });
+      // Check if no file is selected
+      if (!file) {
+        setCarDetailsInputError({
+          ...carDetailsInputError,
+          imageError: "Please select a file.",
+        });
+        return;
+      }
+      // Validate file type
+      if (!file.type.startsWith("image/")) {
+        setCarDetailsInputError({
+          ...carDetailsInputError,
+          imageError: "Please upload a valid image file (JPEG, PNG, etc.).",
+        });
+        return;
+      }
+
+      // Validate file size (e.g., 5MB limit)
+      const maxSize = 1 * 1024 * 1024; // 5MB in bytes
+      if (file.size > maxSize) {
+        setCarDetailsInputError({
+          ...carDetailsInputError,
+          imageError: "File size must be less than 1MB.",
+        });
+        return;
+      }
+      // Validate file extension
+      const allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+      const fileExtension = file.name.split(".").pop().toLowerCase();
+      if (!allowedExtensions.includes(fileExtension)) {
+        setCarDetailsInputError({
+          ...carDetailsInputError,
+          imageError: "Only JPG, JPEG, PNG, and webp files are allowed.",
+        });
+        return;
+      }
+
+      return setCarDetailsInput({
+        ...carDetailsInput,
+        [e.target.name]: file,
+        imageName: file ? file.name : "",
+      });
+    }
+    // car description error
+    if (e.target.name === "description") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        descriptionError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          [e.target.name]: e.target.value,
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        descriptionError: "Provide Car details",
+      });
+    }
+    // car dailyRentalPrice error
+    if (e.target.name === "dailyRentalPrice") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        dailyRentalPriceError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          [e.target.name]: Number(e.target.value),
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        dailyRentalPriceError: "Provide daily rental price",
+      });
+    }
+    // car vehicleRegistrationNumber error
+    if (e.target.name === "vehicleRegistrationNumber") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        vehicleRegistrationNumberError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          [e.target.name]: e.target.value,
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        vehicleRegistrationNumberError: "Provide registration no of the car",
+      });
+    }
+    // car location error
+    if (e.target.name === "location") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        locationError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          [e.target.name]: e.target.value,
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        locationError: "Car location must be given",
+      });
+    }
+    // engine error
+    if (e.target.name === "engine") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        engineError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          carInfo: {
+            ...carDetailsInput.carInfo,
+            [e.target.name]: e.target.value,
+          },
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        engineError: "Engine info must be given",
+      });
+    }
+    // fuel error
+    if (e.target.name === "fuel") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        fuelError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          carInfo: {
+            ...carDetailsInput.carInfo,
+            [e.target.name]: e.target.value,
+          },
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        fuelError: "fuel info must be given",
+      });
+    }
+    // doors error
+    if (e.target.name === "doors") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        doorsError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          carInfo: {
+            ...carDetailsInput.carInfo,
+            [e.target.name]:Number(e.target.value),
+          },
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        doorsError: "doors info must be given",
+      });
+    }
+    // mileage
+    if (e.target.name === "mileage") {
+      const value = e.target.value;
+      return setCarDetailsInput({
+        ...carDetailsInput,
+        carInfo: {
+          ...carDetailsInput.carInfo,
+          [e.target.name]: e.target.value,
+        },
+      });
+    }
+    // transmission
+    if (e.target.name === "transmission") {
+      const value = e.target.value;
+      return setCarDetailsInput({
+        ...carDetailsInput,
+        carInfo: {
+          ...carDetailsInput.carInfo,
+          [e.target.name]: e.target.value,
+        },
+      });
+    }
+    // passenger error
+    if (e.target.name === "passenger") {
+      const value = e.target.value;
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        passengerError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          carInfo: {
+            ...carDetailsInput.carInfo,
+            [e.target.name]:Number(e.target.value),
+          },
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        passengerError: "passenger info must be given",
+      });
+    }
+
+    // car features error
+    if (e.target.name === "features") {
+      const value = e.target.value.split(",");
+      setCarDetailsInputError({
+        ...carDetailsInputError,
+        featuresError: "",
+      });
+      if (value.length > 0) {
+        return setCarDetailsInput({
+          ...carDetailsInput,
+          [e.target.name]: value,
+        });
+      }
+      return setCarDetailsInputError({
+        ...carDetailsInputError,
+        featuresError: "This field can't be empty",
+      });
+    }
+
+    setCarDetailsInput({ ...carDetailsInput, [e.target.name]: e.target.value });
   };
 
-  const handleAddReviewSubmit = async (e) => {
+  const validateFormStep = () => {
+    let isValid = true;
+    let errors = { ...carDetailsInputError };
+
+    if (formStepNo === 0) {
+      if (!carDetailsInput.carModel.trim()) {
+        errors.carModelError = "car name is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.image) {
+        errors.imageError = "Image is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.description.trim()) {
+        errors.descriptionError = "description is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.carType.trim()) {
+        errors.carTypeError = "car category is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.location.trim()) {
+        errors.locationError = "car location is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.dailyRentalPrice) {
+        errors.dailyRentalPriceError = "Rental price is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.vehicleRegistrationNumber.trim()) {
+        errors.vehicleRegistrationNumberError = "Registration no is required!";
+        isValid = false;
+      }
+    } else if (formStepNo === 1) {
+      if (!carDetailsInput.carInfo.engine.trim()) {
+        errors.engineError = "Engine info is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.carInfo.fuel.trim()) {
+        errors.fuelError = "Fuel info is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.carInfo.doors) {
+        errors.doorsError = "Door info is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.carInfo.passenger) {
+        errors.passengerError = "Passenger info is required!";
+        isValid = false;
+      }
+      if (!carDetailsInput.features.join(",").trim()) {
+        errors.featuresError = "Features is required!";
+        isValid = false;
+      }
+    }
+
+    setCarDetailsInputError(errors);
+    return isValid;
+  };
+
+  const handleFormStepPrev = () => {
+    if (formStepNo !== 0 && validateFormStep()) {
+      setFormStepNo((prev) => prev - 1);
+    }
+  };
+  const handleFormStepNext = () => {
+    if (formStepNo !== formHeadlineArray?.length - 1 && validateFormStep()) {
+      setFormStepNo((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.scrollTo({ top: 80, behavior: "smooth" });
+  }, [formStepNo]);
+
+  const handleCarAddOnSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("image", e.target.image.files[0]);
+    formData.append("image", carDetailsInput.image);
     setCarDataUploadLoading(true);
+    try {
+      // Upload image to ImgBB
+      const imgBBResponse = await fetch(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbbAPI}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-    fetch(
-      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbbAPI}`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
+      const imgBBData = await imgBBResponse.json();
+      if (imgBBData.success) {
+        // Prepare the car data to be sent to the server
+        console.log(imgBBData?.data?.url);
+        const { image, imageName, ...rest } = carDetailsInput;
+        const carDataFull = { ...rest, imageUrl: imgBBData?.data?.url };
+        console.log(carDataFull);
+        // Make a POST request to your server
+        const serverResponse = await fetch(`${import.meta.env.VITE_backend}caravan/cars/add-car`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(carDataFull),
+        });
+
+        const serverData = await serverResponse.json();
+        if (!serverResponse.ok) {
+          throw new Error(serverData.message || "Failed to submit car data");
+        }
+        // Handle successful submission
+        // console.log("Car data submitted successfully:", serverData);
         setCarDataUploadLoading(false);
-        console.log(data?.data?.url);
-      });
+        toast.success("Car added. pending approval")
+        // Reset the form after successful submission
+        resetForm();
+      }
+    } catch (error) {
+      toast.error( error.message);
+      setCarDataUploadLoading(false);
+      // Optionally, display an error message to the user
+      // setError(error.message);
+    }
   };
+  // Function to reset the form to its initial state
+  const resetForm = () => {
+    setCarDetailsInput({
+      carModel: "",
+      carType: "",
+      year: new Date(),
+      adminApproval: "pending",
+      dailyRentalPrice: "",
+      availability: true,
+      vehicleRegistrationNumber: "",
+      features: [],
+      description: "",
+      bookingCount: 0,
+      image: null,
+      imageName: "",
+      location: "",
+      carInfo: {
+        engine: "",
+        fuel: "",
+        mileage: "",
+        transmission: "",
+        doors: "",
+        passenger: "",
+      },
+      addedBy: {
+        userId: user?.uid,
+        name: user?.displayName,
+        email: user?.email,
+      },
+      dateAdded: new Date(),
+      bookingStatus: "available",
+    });
+
+    // Reset errors if any
+    setCarDetailsInputError({
+      carModelError: "",
+      carTypeError: "",
+      imageError: "",
+      descriptionError: "",
+      dailyRentalPriceError: "",
+      vehicleRegistrationNumberError: "",
+      locationError: "",
+      engineError: "",
+      fuelError: "",
+      doorsError: "",
+      passengerError: "",
+      featuresError: "",
+    });
+
+    // Optionally, reset the form step to the first step
+    setFormStepNo(0);
+  };
+
+  // console.log(carDetailsInput, carDetailsInput?.imageName);
+
   return (
     <>
-      <form className="space-y-4 " onSubmit={handleAddReviewSubmit}>
-        <div className="space-y-1 text-sm">
-          <InputField
-            label={"Game Title"}
-            error={reviewInputError.gameNameError}
-            customClassName="text-white"
-          >
-            <input
-              type="text"
-              name="gameName"
-              id="gameName"
-              defaultValue={reviewInput.gameName}
-              onChange={handleReviewInputOnChange}
-              placeholder="Game Title"
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600 outline-0"
-              // required
-            />
-          </InputField>
-        </div>
-        <div className="space-y-1 text-sm">
-          <InputField
-            label={"Game Image"}
-            error={reviewInputError.imageError}
-            customClassName="text-white"
-          >
-            <input
-              type="file"
-              name="image"
-              id="image"
-              defaultValue={reviewInput.image}
-              onChange={handleReviewInputOnChange}
-              placeholder="Game Image Url"
-              className="file-input w-full rounded-md border-gray-300 bg-gray-50 outline-0 text-gray-600"
-              // required
-            />
-          </InputField>
-        </div>
-        <div className="space-y-1 text-sm">
-          <InputField
-            label={"Review details"}
-            error={reviewInputError.reviewError}
-            customClassName="text-white"
-          >
-            <textarea
-              type="text"
-              name="review"
-              id="review"
-              defaultValue={reviewInput.review}
-              onChange={handleReviewInputOnChange}
-              placeholder="Game review details"
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600 outline-0 resize-none"
-              // required
-            />
-          </InputField>
-        </div>
-        <div className="space-y-1 text-sm flex flex-col lg:flex-row justify-center lg:items-center lg:justify-stretch lg:gap-5">
-          <InputField
-            label={"Enter a Rating (0-10):"}
-            error={reviewInputError.ratingError}
-            customClassName="text-white"
-          >
-            <input
-              type="number"
-              name="rating"
-              id="rating"
-              defaultValue={reviewInput.rating}
-              onChange={handleReviewInputOnChange}
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600 outline-0"
-              placeholder="0-10"
-              min={0}
-              max={10}
-              // required
-            />
-          </InputField>
-          <InputField label={"Publishing Year:"} customClassName="text-white">
-            <DatePicker
-              selected={reviewInput.publishYear}
-              renderYearContent={renderYearContent}
-              showYearPicker
-              // defaultValue={reviewInput.publishYear}
-              onChange={(date) =>
-                setReviewInput({
-                  ...reviewInput,
-                  publishYear: date,
-                })
-              }
-              dateFormat="yyyy"
-              className="w-full px-4 py-3 rounded-md border-gray-300  text-gray-800  bg-gray-50 outline-0"
-            />
-          </InputField>
-
-          <InputField label={"Genre "} customClassName="text-white">
-            <select
-              name="genre"
-              id="genre"
-              defaultValue={reviewInput.genre}
-              onChange={handleReviewInputOnChange}
-              className="w-full px-4 py-3 rounded-md border-gray-300  text-gray-800 focus:border-violet-600 outline-0 bg-gray-50"
-              // required
+      <form className="space-y-4 " onSubmit={handleCarAddOnSubmit}>
+        <>{handleFormContent()}</>
+        <div className="w-full flex items-center justify-center gap-8 pt-5">
+          <div className="w-full flex justify-end">
+            <button
+              className={`block w-1/2 p-3 text-center font-bold rounded-sm ${
+                formStepNo === 0
+                  ? "text-gray-50 bg-primary-orange/50"
+                  : "text-gray-50 bg-primary-orange"
+              }`}
+              onClick={handleFormStepPrev}
+              disabled={formStepNo === 0}
             >
-              <option value="action">Action</option>
-              <option value="rpg">RPG</option>
-              <option value="adventure">Adventure</option>
-              <option value="survival">Survival</option>
-              <option value="farming">Farming</option>
-              <option value="other">Other</option>
-            </select>
-          </InputField>
-        </div>
-        <div className="space-y-1 text-sm">
-          <InputField label={"User Email"} customClassName="text-white">
-            <input
-              type="email"
-              name="userEmail"
-              id="userEmail"
-              defaultValue={user?.email}
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-300 text-gray-800 focus:border-violet-600 outline-0 resize-none"
-              disabled
-            />
-          </InputField>
-        </div>
-        <div className="space-y-1 text-sm">
-          <InputField label={"User Name"} customClassName="text-white">
-            <input
-              type="text"
-              name="userName"
-              id="userName"
-              defaultValue={user?.displayName}
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-300 text-gray-800 focus:border-violet-600 outline-0 resize-none"
-              disabled
-            />
-          </InputField>
-        </div>
-        <div className="w-full grid place-items-center">
-        <button
-          className="block w-1/2 mx-auto p-3 text-center font-bold rounded-sm text-gray-50 bg-primary-orange"
-          type="submit"
-        >
-          {carDataUploadLoading ? (
-            <>
-              <span className="loading loading-spinner loading-xs"></span>
-              <span className="loading loading-spinner loading-sm"></span>
-              <span className="loading loading-spinner loading-md"></span>
-            </>
-          ) : (
-            "Add Car"
-          )}
-        </button>
+              Previous page
+            </button>
+          </div>
+          <div className="w-full">
+            {formStepNo !== formHeadlineArray?.length - 1 ? (
+              <a
+                className="block w-1/2 p-3 text-center font-bold rounded-sm text-gray-50 bg-primary-orange"
+                onClick={handleFormStepNext}
+                // type="button"
+                // disabled={!validateFormStep()}
+              >
+                Next page
+              </a>
+            ) : (
+              <button
+                className="block w-1/2 p-3 text-center font-bold rounded-sm text-gray-50 bg-primary-orange"
+                type="submit"
+              >
+                {carDataUploadLoading ? (
+                  <>
+                    <span className="loading loading-spinner loading-xs"></span>
+                    <span className="loading loading-spinner loading-sm"></span>
+                    <span className="loading loading-spinner loading-md"></span>
+                  </>
+                ) : (
+                  "Submit Car"
+                )}
+              </button>
+            )}
+          </div>
         </div>
       </form>
     </>
