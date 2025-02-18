@@ -11,7 +11,7 @@ const Pagination = ({ currentPageNo, setCurrentPageNo, totalPageNumber }) => {
   };
 
   return (
-    <div className="w-full flex items-center justify-center pt-5">
+    <div className="flex items-center justify-center pt-5">
       <div className="inline-flex items-center justify-center gap-3">
         <button
           onClick={previousPage}

@@ -9,6 +9,8 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import RegisterPage from "../pages/RegisterPage";
+import MyCarsPage from "../pages/MyCarsPage";
+import CarDetailsPage from "../pages/CarDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +27,16 @@ const router = createBrowserRouter([
         element: <AllCarsPage />,
       },
       {
+        path: "/cars/:id",
+        element: <CarDetailsPage />,
+      },
+      {
         path: "/add-cars",
         element: <AddCarsPage />,
+      },
+      {
+        path: "/my-cars",
+        element: <MyCarsPage />,
       },
       {
         path: "/about-us",

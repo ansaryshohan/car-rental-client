@@ -42,11 +42,13 @@ const AllCarsPage = () => {
           {/* all the cars section with pagination component */}
           <div className="w-full mx-auto pt-8 pb-10 px-6 bg-gray-background">
             <AllCars isPending={isPending} error={error} data={data?.allCars} />
+            <div>
             <Pagination
               currentPageNo={currentPageNo}
               setCurrentPageNo={setCurrentPageNo}
               totalPageNumber={totalPageNumber}
             />
+            </div>
           </div>
         </div>
       </div>

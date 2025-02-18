@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
-import { FaUserCheck } from "react-icons/fa";
+import { FaCarSide, FaUserCheck } from "react-icons/fa";
 import { GiCrossedBones } from "react-icons/gi";
 import { IoMenu } from "react-icons/io5";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -206,6 +206,21 @@ const Header = () => {
                         <FaUserCheck size={18} />
                       </span>
                       <span className="block text-center"> Your Profile</span>
+                    </span>
+                  </Link>
+                  <Link
+                    to={"/my-cars"}
+                    className="block w-full px-4 pb-4 text-base text-white hover:bg-black/20"
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="user-menu-item-0"
+                    onClick={() => setLoginDropdown(false)}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="block ">
+                        <FaCarSide size={18} />
+                      </span>
+                      <span className="block text-center"> My cars</span>
                     </span>
                   </Link>
                   <button

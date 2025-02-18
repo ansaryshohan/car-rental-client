@@ -160,7 +160,7 @@ const CarInfoInputs = ({
             id="features"
             defaultValue={carDetailsInput?.features.join(",")}
             onChange={handleCarDetailsInputOnChange}
-            placeholder="write the features with comma separation"
+            placeholder="Leather Interior, Bluetooth Support, Changing Support, Wider space"
             className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600 outline-0 resize-none"
             required
           />
