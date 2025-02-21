@@ -8,6 +8,7 @@ import axiosCredentialInstance from "../axios/credentialAxios";
 import InputField from "../components/Login&Register/InputField";
 import PageHeader from "../components/shared/PageHeader";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Title from "../components/shared/Title";
 
 const ConfirmBookingPage = () => {
   const { id } = useParams();
@@ -134,7 +135,7 @@ const ConfirmBookingPage = () => {
 
   return (
     <div className="">
-      {/* <Title title={"Add-Car | Caravan"} /> */}
+      <Title title={"Car-booking | Caravan"} />
 
       <div
         className="relative w-full min-h-screen pb-10 pt-[17vh]"

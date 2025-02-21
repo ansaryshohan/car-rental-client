@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import LeftSideCard from "../components/carDetailsComp/LeftSideCard";
 import PageHeader from "../components/shared/PageHeader";
 import RightSideCard from "../components/carDetailsComp/RightSideCard";
+import Title from "../components/shared/Title";
 
 const CarDetailsPage = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const CarDetailsPage = () => {
 
   return (
     <div className="">
-      {/* <Title title={"Add-Car | Caravan"} /> */}
+      <Title title={"Car-Details | Caravan"} />
 
       <div
         className="relative w-full min-h-screen pb-10 pt-[17vh]"

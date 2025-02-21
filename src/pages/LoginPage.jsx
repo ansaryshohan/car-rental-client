@@ -3,6 +3,7 @@ import loginImgBg1 from "../assets/login-img1.jpg";
 import loginImg from "../assets/loginImg.webp";
 import LoginForm from "../components/Login&Register/LoginForm";
 import SocialLogin from "../components/Login&Register/SocialLogin";
+import Title from "../components/shared/Title";
 
 const LoginPage = () => {
   return (
@@ -17,6 +18,7 @@ const LoginPage = () => {
       }}
       className="pt-[17vh] min-h-screen pb-10 bg-black text-white flex justify-center items-center gap-10"
     >
+      <Title title={"Login | Caravan"}/>
       <div className="w-full lg:w-11/12 flex justify-center items-center gap-8 min-h-screen bg-gray-800 text-white rounded-2xl">
         <div className="hidden md:block w-1/2 relative">
           <div className="w-full flex justify-center items-center px-8">

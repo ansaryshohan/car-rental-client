@@ -7,6 +7,7 @@ import axiosCredentialInstance from "../axios/credentialAxios";
 import Pagination from "../components/allCarsComp/Pagination";
 import MyCarTableRow from "../components/myCarsComp/MyCarTableRow";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Title from "../components/shared/Title";
 
 const MyCarsPage = () => {
   const { user } = useAuthContext();
@@ -92,7 +93,7 @@ const MyCarsPage = () => {
 
   return (
     <div className="">
-      {/* <Title title={"HomePage | GameHub"} /> */}
+      <Title title={"MyCars | Caravan"} />
       {/* <UpdateReviewModal setMyReviews={setMyReviews} /> */}
       <div
         className="relative w-full min-h-screen pb-10 pt-[17vh]"

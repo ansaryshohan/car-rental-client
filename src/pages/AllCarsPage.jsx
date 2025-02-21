@@ -5,6 +5,7 @@ import AllCars from "../components/allCarsComp/AllCars";
 import FilterAndSortSection from "../components/allCarsComp/FilterAndSortSection";
 import Pagination from "../components/allCarsComp/Pagination";
 import PageHeader from "../components/shared/PageHeader";
+import Title from "../components/shared/Title";
 
 const AllCarsPage = () => {
   const [currentPageNo, setCurrentPageNo] = useState(0);
@@ -22,7 +23,7 @@ const AllCarsPage = () => {
 
   return (
     <div className="">
-      {/* <Title title={"Add-Car | Caravan"} /> */}
+      <Title title={"All-Car | Caravan"} />
 
       <div
         className="relative w-full min-h-screen pb-10 pt-[17vh]"

@@ -6,6 +6,7 @@ import Pagination from "../components/allCarsComp/Pagination";
 import MyBookingTableRow from "../components/myBookingPageComp/MyBookingTableRow";
 import PageHeader from "../components/shared/PageHeader";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Title from "../components/shared/Title";
 
 const MyBookingsPage = () => {
   const { user } = useAuthContext();
@@ -65,7 +66,7 @@ const MyBookingsPage = () => {
   // console.log(data?.bookings[0].bookedCars);
   return (
     <div className="">
-      {/* <Title title={"HomePage | GameHub"} /> */}
+      <Title title={"MyBookings | Caravan"} />
       {/* <UpdateReviewModal setMyReviews={setMyReviews} /> */}
       <div
         className="relative w-full min-h-screen pb-10 pt-[17vh]"

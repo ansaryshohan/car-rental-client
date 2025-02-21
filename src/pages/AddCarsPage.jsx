@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddCarForm from "../components/addCarsComp/AddCarForm";
 import PageHeader from "../components/shared/PageHeader";
+import Title from "../components/shared/Title";
 
 const AddCarsPage = () => {
   const [formStepNo, setFormStepNo] = useState(0);
@@ -8,7 +9,7 @@ const AddCarsPage = () => {
 
   return (
     <div className="">
-      {/* <Title title={"Add-Car | Caravan"} /> */}
+      <Title title={"Add-Car | Caravan"} />
 
       <div
         className="relative w-full min-h-screen pb-10 pt-[17vh]"
