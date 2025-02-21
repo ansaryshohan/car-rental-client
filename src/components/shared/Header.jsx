@@ -39,7 +39,7 @@ const Header = () => {
         // cookie set when login
         try {
           const {data} = await axiosCredentialInstance.post(`remove-jwt`);
-          console.log(data)
+          // console.log(data)
           toast.success(data?.message);
           setUser(null);
           navigate("/login");

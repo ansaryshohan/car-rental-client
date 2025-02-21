@@ -139,33 +139,41 @@ const RegisterForm = () => {
             // update user displayName and photoUrl
             // console.log(userInput.photoFile, result.user);
 
-            formData.set("photo", userInput.photoFile);
-            formData.set("userEmail", result?.user?.email);
+            formData.append("image", userInput.photoFile);
             // console.log(formData);
+            try {
+              // Upload image to ImgBB
+              const imgBBResponse = await fetch(
+                `https://api.imgbb.com/1/upload?key=${
+                  import.meta.env.VITE_imgbbAPI
+                }`,
+                {
+                  method: "POST",
+                  body: formData,
+                }
+              );
 
-            const response = await fetch(
-              `${import.meta.env.VITE_backend}caravan/user-image`,
-              { method: "POST", body: formData }
-            );
-            const { data } = await response.json();
-
-            // console.log(data);
-
-            updateUser({
-              displayName: userInput.userName,
-              photoURL: import.meta.env.VITE_backend + data.userImg,
-            })
-              .then(() => {
-                toast.success("user created successfully");
-                setSubmitLoading(false);
-                navigate("/");
-                return;
-              })
-              .catch((err) => {
-                setErrorState({ ...errorState, registerError: err.code });
-                toast.error(err.code);
-                return;
-              });
+              const imgBBData = await imgBBResponse.json();
+              if (imgBBData.success) {
+                updateUser({
+                  displayName: userInput.userName,
+                  photoURL: imgBBData?.data?.url,
+                })
+                  .then(() => {
+                    toast.success("user created successfully");
+                    setSubmitLoading(false);
+                    navigate("/");
+                    return;
+                  })
+                  .catch((err) => {
+                    setErrorState({ ...errorState, registerError: err.code });
+                    toast.error(err.code);
+                    return;
+                  });
+              }
+            } catch (error) {
+              toast.error(error.message);
+            }
           }
         })
         .catch((err) => {
@@ -180,10 +188,7 @@ const RegisterForm = () => {
 
   return (
     <>
-      <form
-        className="space-y-6"
-        onSubmit={handleRegisterOnSubmit}
-      >
+      <form className="space-y-6" onSubmit={handleRegisterOnSubmit}>
         <div className="space-y-1 text-sm">
           <InputField label={"User Name"}>
             <input

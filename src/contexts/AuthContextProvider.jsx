@@ -48,6 +48,7 @@ const AuthContextProvider = ({ children }) => {
           setUser(currentUser);
           // cookie set when login
           try {
+            // console.log(currentUser);
             const response = await axiosCredentialInstance.post(`jwt`, {
               userEmail: currentUser?.email,
             });
