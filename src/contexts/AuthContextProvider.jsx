@@ -8,6 +8,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
+import axiosCredentialInstance from "../axios/credentialAxios";
 import auth from "../firebase/firebase.init";
 import AuthContext from "./AuthContext";
 
@@ -42,11 +43,25 @@ const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-        // console.log(currentUser);
-      }
-      setLoading(false);
+      const fetchToken = async () => {
+        if (currentUser) {
+          setUser(currentUser);
+          // cookie set when login
+          try {
+            const response = await axiosCredentialInstance.post(`jwt`, {
+              userEmail: currentUser?.email,
+            });
+          } catch (error) {
+            console.error(
+              "Failed to get JWT token:",
+              error.response?.data || error.message
+            );
+          }
+        }
+        setLoading(false);
+      };
+
+      fetchToken();
     });
     return () => unSubscribe();
   }, [user]);

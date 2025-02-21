@@ -144,7 +144,7 @@ const RegisterForm = () => {
             // console.log(formData);
 
             const response = await fetch(
-              "http://localhost:8000/caravan/user-image",
+              `${import.meta.env.VITE_backend}caravan/user-image`,
               { method: "POST", body: formData }
             );
             const { data } = await response.json();

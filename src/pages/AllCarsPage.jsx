@@ -12,7 +12,7 @@ const AllCarsPage = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["recentCars",currentPageNo],
     queryFn: async ({queryKey}) => {
-      const res = await axios.get(`${import.meta.env.VITE_backend}caravan/cars/all-cars?pageNo=${queryKey[1]}&perPageData=${9}`);
+      const res = await axios.get(`${import.meta.env.VITE_backend}caravan/cars/available-cars?pageNo=${queryKey[1]}&perPageData=${9}`);
       return res.data?.data;
     },
   });

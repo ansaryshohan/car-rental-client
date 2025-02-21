@@ -1,16 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import AboutUsPage from "../pages/AboutUsPage";
 import AddCarsPage from "../pages/AddCarsPage";
 import AllCarsPage from "../pages/AllCarsPage";
+import CarDetailsPage from "../pages/CarDetailsPage";
+import ConfirmBookingPage from "../pages/ConfirmBookingPage";
 import ContactUsPage from "../pages/ContactUsPage";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
+import MyBookingsPage from "../pages/MyBookingsPage";
+import MyCarsPage from "../pages/MyCarsPage";
 import ProfilePage from "../pages/ProfilePage";
 import RegisterPage from "../pages/RegisterPage";
-import MyCarsPage from "../pages/MyCarsPage";
-import CarDetailsPage from "../pages/CarDetailsPage";
+import PrivateRoute from "./PrivateRoute";
+import RestrictedRoute from "./RestrictedRoute";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +26,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/all-cars",
+        path: "/available-cars",
         element: <AllCarsPage />,
       },
       {
@@ -31,16 +34,38 @@ const router = createBrowserRouter([
         element: <CarDetailsPage />,
       },
       {
+        path: "/confirm-booking/:id",
+        element: (
+          <PrivateRoute>
+            <ConfirmBookingPage />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/add-cars",
-        element: <AddCarsPage />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <AddCarsPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-cars",
-        element: <MyCarsPage />,
+        element: (
+          <PrivateRoute>
+            <MyCarsPage />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "/about-us",
-        element: <AboutUsPage />,
+        path: "/my-bookings",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <MyBookingsPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/contact-us",
@@ -48,15 +73,30 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <ProfilePage />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <ProfilePage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
-        element: <LoginPage />,
+        element: (
+          <RestrictedRoute>
+            {" "}
+            <LoginPage />
+          </RestrictedRoute>
+        ),
       },
       {
         path: "/register",
-        element: <RegisterPage />,
+        element: (
+          <RestrictedRoute>
+            {" "}
+            <RegisterPage />
+          </RestrictedRoute>
+        ),
       },
     ],
   },

@@ -44,7 +44,7 @@ const LoginForm = () => {
   const handleLoginOnSubmit = (e) => {
     e.preventDefault();
     loginWithEmailAndPassword(userInput.email, userInput.password)
-      .then((result) => {
+      .then(async (result) => {
         if (result) {
           toast.success("login successful");
           navigate(from, { replace: true });

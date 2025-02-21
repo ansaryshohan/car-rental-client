@@ -15,6 +15,7 @@ const LeftSideCard = ({ carData }) => {
     carType,
     year,
     dailyRentalPrice,
+    adminApproval,
     availability,
     carInfo: { engine, fuel, mileage, transmission, passenger, doors },
     dateAdded,
@@ -32,7 +33,7 @@ const LeftSideCard = ({ carData }) => {
   ).padStart(2, "0")}-${dateObj.getFullYear()}`;
 
   return (
-    <div className="w-full md:w-4/12 sticky top-24">
+    <div className="w-full md:w-4/12 md:sticky md:top-24">
       <div className="bg-gray-background rounded-3xl pb-4 py-6">
         {/* car rental price */}
         <div className="w-10/12 mx-auto py-4 px-2">
@@ -49,7 +50,7 @@ const LeftSideCard = ({ carData }) => {
           </p>
           {/* book now button */}
           <div className="w-full flex items-center justify-start pt-4">
-            <Link className="hover:transition-all hover:duration-500 hover:scale-x-[95%] flex items-center gap-0.5">
+            <Link to={adminApproval==="approved" && `/confirm-booking/${_id}`} className="hover:transition-all hover:duration-500 hover:scale-x-[95%] flex items-center gap-0.5">
               <button className="px-5 py-2 rounded-4xl border border-primary-orange  text-base font-bold bg-primary-orange text-white ">
                 {" "}
                 Rent The Car

@@ -7,7 +7,7 @@ import { Tooltip } from "react-tooltip";
 const MyCarTableRow = ({
   rowData,
   indexNo,
-  handleReviewDelete,
+  handleMyCarDelete,
   // handleUpdateModalData,
 }) => {
   const {
@@ -63,7 +63,7 @@ const MyCarTableRow = ({
                 <FaEye size={12} />
               </button>
               <Tooltip anchorSelect="#view" clickable>
-                <button>view review</button>
+                <button>view car</button>
               </Tooltip>
             </Link>
           </div>
@@ -77,7 +77,7 @@ const MyCarTableRow = ({
               <FaPen size={12} />
             </button>
             <Tooltip anchorSelect="#update" clickable place="top-start">
-              <button>update review</button>
+              <button>update car info</button>
             </Tooltip>
           </div>
           {/* delete the car data */}
@@ -85,7 +85,7 @@ const MyCarTableRow = ({
             <button
               id="delete"
               className="btn btn-error  h-auto min-h-3 px-1 py-2"
-              onClick={() => handleReviewDelete(_id)}
+              onClick={() => handleMyCarDelete(_id)}
             >
               <MdDeleteForever size={14} />
             </button>

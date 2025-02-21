@@ -36,7 +36,7 @@ const RecentCarSection = () => {
       </div>
       {/* view all cars button */}
       <div className="pt-4 pb-3 w-full flex items-center justify-center">
-        <Link to={"/all-cars"}>
+        <Link to={"/available-cars"}>
         <button className="px-12 py-3 rounded-4xl border border-primary-orange bg-primary-orange text-white text-lg font-bold hover:bg-primary-orange hover:text-white hover:transition-all hover:duration-500 hover:scale-x-[85%]">
           {" "}
           View More

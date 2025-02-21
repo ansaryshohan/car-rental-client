@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import lockIcon from "../../assets/lock-100.png";
 import speedometerIcon from "../../assets/speedometer-100.png";
 
 import { FaDiamondTurnRight } from "react-icons/fa6";
 import { GiBeveledStar } from "react-icons/gi";
 
-const RightSideCard = ({carData}) => {
-  const { _id,carModel, imageUrl,description, features } = carData;
+const RightSideCard = ({ carData }) => {
+  const { _id, carModel, imageUrl, description, features,adminApproval } = carData;
   return (
     <div className="w-full md:flex-1">
       {/* car image */}
@@ -17,7 +18,7 @@ const RightSideCard = ({carData}) => {
         />
       </div>
       {/* info div */}
-      <div className="flex items-center justify-between gap-6 w-full rounded-2xl border p-4 mt-6">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full rounded-2xl border p-4 mt-6">
         <div className="flex items-center justify-around gap-2">
           <img src={speedometerIcon} alt="icon" className="w-14" />
           <div>
@@ -104,10 +105,12 @@ const RightSideCard = ({carData}) => {
       </div>
       {/* book now button */}
       <div className=" w-full bottom-12  flex items-center justify-center">
-        <button className="px-12 py-3 rounded-4xl border border-primary-orange bg-transparent text-primary-orange text-lg font-bold hover:bg-primary-orange hover:text-white hover:transition-all hover:duration-500 hover:scale-x-[85%]">
-          {" "}
-          Rent The Car
-        </button>
+        <Link to={adminApproval==="approved" && `/confirm-booking/${_id}`}>
+          <button className="px-12 py-3 rounded-4xl border border-primary-orange bg-transparent text-primary-orange text-lg font-bold hover:bg-primary-orange hover:text-white hover:transition-all hover:duration-500 hover:scale-x-[85%]">
+            {" "}
+            Rent The Car
+          </button>
+        </Link>
       </div>
     </div>
   );

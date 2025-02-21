@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from "react-toastify";
+import axiosCredentialInstance from "../../axios/credentialAxios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import CarDetailsInputs from "./CarDetailsInputs";
 import CarInfoInputs from "./CarInfoInputs";
 import UserInfoInputs from "./UserInfoInputs";
-import { toast } from "react-toastify";
 
 const AddCarForm = ({ formStepNo, setFormStepNo, formHeadlineArray }) => {
   const { user } = useAuthContext();
@@ -303,7 +304,7 @@ const AddCarForm = ({ formStepNo, setFormStepNo, formHeadlineArray }) => {
           ...carDetailsInput,
           carInfo: {
             ...carDetailsInput.carInfo,
-            [e.target.name]:Number(e.target.value),
+            [e.target.name]: Number(e.target.value),
           },
         });
       }
@@ -346,7 +347,7 @@ const AddCarForm = ({ formStepNo, setFormStepNo, formHeadlineArray }) => {
           ...carDetailsInput,
           carInfo: {
             ...carDetailsInput.carInfo,
-            [e.target.name]:Number(e.target.value),
+            [e.target.name]: Number(e.target.value),
           },
         });
       }
@@ -450,7 +451,7 @@ const AddCarForm = ({ formStepNo, setFormStepNo, formHeadlineArray }) => {
   };
 
   useEffect(() => {
-    window.scrollTo({ top: 80, behavior: "smooth" });
+    window.scrollTo({ top: 60, behavior: "smooth" });
   }, [formStepNo]);
 
   const handleCarAddOnSubmit = async (e) => {
@@ -471,35 +472,29 @@ const AddCarForm = ({ formStepNo, setFormStepNo, formHeadlineArray }) => {
       const imgBBData = await imgBBResponse.json();
       if (imgBBData.success) {
         // Prepare the car data to be sent to the server
-        console.log(imgBBData?.data?.url);
+        // console.log(imgBBData?.data?.url);
         const { image, imageName, ...rest } = carDetailsInput;
         const carDataFull = { ...rest, imageUrl: imgBBData?.data?.url };
-        console.log(carDataFull);
+        // console.log(carDataFull);
         // Make a POST request to your server
-        const serverResponse = await fetch(`${import.meta.env.VITE_backend}caravan/cars/add-car`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(carDataFull),
-        });
-
-        const serverData = await serverResponse.json();
-        if (!serverResponse.ok) {
+        const serverData = await axiosCredentialInstance.post(
+          `caravan/cars/add-car`,
+          carDataFull
+        );
+        // handle if error happen
+        if (serverData.status !== 201) {
+          setCarDataUploadLoading(false);
           throw new Error(serverData.message || "Failed to submit car data");
         }
         // Handle successful submission
-        // console.log("Car data submitted successfully:", serverData);
         setCarDataUploadLoading(false);
-        toast.success("Car added. pending approval")
+        toast.success("Car added. pending approval");
         // Reset the form after successful submission
         resetForm();
       }
     } catch (error) {
-      toast.error( error.message);
+      toast.error(error.message);
       setCarDataUploadLoading(false);
-      // Optionally, display an error message to the user
-      // setError(error.message);
     }
   };
   // Function to reset the form to its initial state

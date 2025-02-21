@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BiLogOut } from "react-icons/bi";
+import { BiBookmarkHeart, BiLogOut } from "react-icons/bi";
 import { FaCarSide, FaUserCheck } from "react-icons/fa";
 import { GiCrossedBones } from "react-icons/gi";
 import { IoMenu } from "react-icons/io5";
@@ -7,7 +7,9 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoImg from "../../assets/logo.png";
 import userDemoImg from "../../assets/user_demo.jpg";
+import axiosCredentialInstance from "../../axios/credentialAxios";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import useCheckAdmin from "../../hooks/useCheckAdmin";
 
 const Header = () => {
   const [loginDropdown, setLoginDropdown] = useState(false);
@@ -15,6 +17,7 @@ const Header = () => {
   const [bgColorChange, setBgColorChange] = useState(false);
   const { user, logOut, setUser } = useAuthContext();
   const navigate = useNavigate();
+  const isAdmin = useCheckAdmin();
 
   // background color change on scrolling
   const handleStickyNav = () => {
@@ -32,11 +35,21 @@ const Header = () => {
   const handleLogOutOnClick = () => {
     setLoginDropdown(false);
     logOut()
-      .then(() => {
-        toast.success("logged Out Successful");
-        setUser(null);
-        navigate("/login");
-        return;
+      .then(async () => {
+        // cookie set when login
+        try {
+          const {data} = await axiosCredentialInstance.post(`remove-jwt`);
+          console.log(data)
+          toast.success(data?.message);
+          setUser(null);
+          navigate("/login");
+          return;
+        } catch (error) {
+          console.error(
+            "Failed to get JWT token:",
+            error.response?.data || error.message
+          );
+        }
       })
       .catch(() => toast.error("error in logged out"));
   };
@@ -62,6 +75,7 @@ const Header = () => {
             hamBurgerMenu ? "absolute z-50 top-0 right-0" : "hidden"
           } lg:static lg:block lg:flex-1 w-[70vw] lg:w-auto h-[100vh] lg:h-[8vh] lg:px-5`}
         >
+          {/* menu cross icon div */}
           <div
             className={`${
               hamBurgerMenu ? "absolute z-[60]  top-4 right-4" : "hidden"
@@ -73,7 +87,9 @@ const Header = () => {
               onClick={() => setHamBurgerMenu((prev) => !prev)}
             />
           </div>
+          {/* menu list items */}
           <ul className=" flex flex-col justify-start items-start pt-20 lg:pt-0 lg:flex-row lg:justify-around lg:items-center gap-4 h-full bg-slate-100 text-black lg:rounded-4xl">
+            {/* home li */}
             <li
               className="w-full lg:h-full text-center capitalize hover:text-primary-orange duration-200"
               onClick={() => setHamBurgerMenu(false)}
@@ -89,51 +105,42 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
+            {/* available car li */}
             <li
               className="w-full lg:h-full text-center capitalize hover:text-primary-orange duration-200"
               onClick={() => setHamBurgerMenu(false)}
             >
               <NavLink
-                to="/all-cars"
+                to="/available-cars"
                 className={({ isActive }) =>
                   `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${
                     isActive ? "active" : ""
                   }`
                 }
               >
-                All Cars
+                Available Cars
               </NavLink>
             </li>
-            <li
-              className="w-full lg:h-full text-center capitalize hover:text-primary-orange duration-200"
-              onClick={() => setHamBurgerMenu(false)}
-            >
-              <NavLink
-                to="/add-cars"
-                className={({ isActive }) =>
-                  `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${
-                    isActive ? "active" : ""
-                  }`
-                }
+            {/* is user is there then this li will be shown */}
+            {user?.email && (
+              /* add car li */
+              <li
+                className="w-full lg:h-full text-center capitalize hover:text-primary-orange duration-200"
+                onClick={() => setHamBurgerMenu(false)}
               >
-                Add Cars
-              </NavLink>
-            </li>
-            <li
-              className="w-full lg:h-full text-center capitalize hover:text-primary-orange duration-200"
-              onClick={() => setHamBurgerMenu(false)}
-            >
-              <NavLink
-                to="/about-us"
-                className={({ isActive }) =>
-                  `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${
-                    isActive ? "active" : ""
-                  }`
-                }
-              >
-                About Us
-              </NavLink>
-            </li>
+                <NavLink
+                  to="/add-cars"
+                  className={({ isActive }) =>
+                    `w-full h-full flex items-center justify-center rounded-4xl text-lg hover:bg-black/10 ${
+                      isActive ? "active" : ""
+                    }`
+                  }
+                >
+                  Add Cars
+                </NavLink>
+              </li>
+            )}
+            {/* contact us li */}
             <li
               className="w-full lg:h-full text-center capitalize hover:text-primary-orange duration-200"
               onClick={() => setHamBurgerMenu(false)}
@@ -221,6 +228,21 @@ const Header = () => {
                         <FaCarSide size={18} />
                       </span>
                       <span className="block text-center"> My cars</span>
+                    </span>
+                  </Link>
+                  <Link
+                    to={"/my-bookings"}
+                    className="block w-full px-4 pb-4 text-base text-white hover:bg-black/20"
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="user-menu-item-0"
+                    onClick={() => setLoginDropdown(false)}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="block ">
+                        <BiBookmarkHeart size={18} />
+                      </span>
+                      <span className="block text-center"> My Bookings</span>
                     </span>
                   </Link>
                   <button
