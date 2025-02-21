@@ -18,6 +18,10 @@ const AllCarsPage = () => {
     },
   });
 
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
   const totalPageNumber = Math.ceil(Number(data?.totalNoOfCars)/ 9);
 
 
