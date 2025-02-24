@@ -9,21 +9,39 @@ import Title from "../components/shared/Title";
 
 const AllCarsPage = () => {
   const [currentPageNo, setCurrentPageNo] = useState(0);
+  const [priceSort, setPriceSort] = useState("");
+  const [filterDataSearch, setFilterDataSearch] = useState({
+    search: "",
+    carType: "",
+  });
 
-  const { isPending, error, data } = useQuery({
-    queryKey: ["recentCars",currentPageNo],
-    queryFn: async ({queryKey}) => {
-      const res = await axios.get(`${import.meta.env.VITE_backend}caravan/cars/available-cars?pageNo=${queryKey[1]}&perPageData=${9}`);
+  const { isPending, error, data, refetch } = useQuery({
+    queryKey: [
+      "recentCars",
+      currentPageNo,
+      priceSort,
+      filterDataSearch.carType,
+      filterDataSearch.search,
+    ],
+    queryFn: async ({ queryKey }) => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_backend}caravan/cars/available-cars?pageNo=${
+          queryKey[1]
+        }&perPageData=${9}&priceSort=${priceSort}&carType=${
+          filterDataSearch.carType
+        }&searchText=${filterDataSearch.search}`
+      );
       return res.data?.data;
     },
   });
+  // console.log(filterDataSearch)
 
-  if (isPending) return "Loading...";
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    refetch();
+  };
 
-  if (error) return "An error has occurred: " + error.message;
-
-  const totalPageNumber = Math.ceil(Number(data?.totalNoOfCars)/ 9);
-
+  const totalPageNumber = Math.ceil(Number(data?.totalNoOfCars) / 9);
 
   return (
     <div className="">
@@ -43,16 +61,21 @@ const AllCarsPage = () => {
         <div className="relative w-full h-full md:w-11/12 top-0 left-[50%] translate-x-[-50%] z-10 text-white ">
           <PageHeader titleText={"ALL Cars"} />
           {/* filter  inputs divs */}
-          <FilterAndSortSection />
+          <FilterAndSortSection
+            priceSort={priceSort}
+            setPriceSort={setPriceSort}
+            filterDataSearch={filterDataSearch}
+            setFilterDataSearch={setFilterDataSearch}
+          />
           {/* all the cars section with pagination component */}
           <div className="w-full mx-auto pt-8 pb-10 px-6 bg-gray-background">
-            <AllCars isPending={isPending} error={error} data={data?.allCars} />
+            <AllCars isPending={isPending} error={error} data={data} />
             <div>
-            <Pagination
-              currentPageNo={currentPageNo}
-              setCurrentPageNo={setCurrentPageNo}
-              totalPageNumber={totalPageNumber}
-            />
+              <Pagination
+                currentPageNo={currentPageNo}
+                setCurrentPageNo={setCurrentPageNo}
+                totalPageNumber={totalPageNumber}
+              />
             </div>
           </div>
         </div>

@@ -6,8 +6,8 @@ import PageHeader from "../components/shared/PageHeader";
 import axiosCredentialInstance from "../axios/credentialAxios";
 import Pagination from "../components/allCarsComp/Pagination";
 import MyCarTableRow from "../components/myCarsComp/MyCarTableRow";
-import { useAuthContext } from "../hooks/useAuthContext";
 import Title from "../components/shared/Title";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const MyCarsPage = () => {
   const { user } = useAuthContext();
@@ -64,9 +64,9 @@ const MyCarsPage = () => {
             data: { userEmail: user.email },
           }
         );
-        // console.log(deletedData,gameReviewData);
-        if (data?.deletedData?.deletedCount > 0) {
-          setMyCars(data?.carDataAfterDelete);
+        console.log(data);
+        if (data?.data?.deletedData?.deletedCount > 0) {
+          setMyCars(data?.data?.carDataAfterDelete);
           Swal.fire({
             title: "Deleted!",
             text: "Your Car has been deleted.",
